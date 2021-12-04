@@ -26,29 +26,12 @@ public class Nucleo {
 	private ImageIcon logo = new ImageIcon(
 			getClass().getClassLoader().getResource("logo.jpg"));
 	
-	//label's
-	private JLabel tabuleiro;
-	private JLabel pdf;
+	//menu inicial
+	private JLabel pdf_ini;
+	private JButton bIni;
+	private JButton bServ;
 	
-	//fim label's
-	
-	//iamgens
-	private ImageIcon pDeF = new ImageIcon(
-			getClass().getClassLoader().getResource("backgroundU.jpg"));
-	
-	private ImageIcon tabu_icon = new ImageIcon(
-			getClass().getClassLoader().getResource("tabuleiro.png"));
-	private Image tenta = tabu_icon.getImage();
-	//fim iamgens
-	
-	private Dados dados;
-	
-	//botões do tabuleiro
-	
-	
-	private Insets margem = new Insets(0,0,0,0);
-	//
-	private JButton swit;
+	private IniciarTabuleiro tabuleiro = new IniciarTabuleiro();
 	
 	
 	public static void main(String[] args) {
@@ -76,40 +59,9 @@ public class Nucleo {
 		Janela1.setIconImage(logo.getImage());
 		Janela1.getContentPane().setLayout(null);
 		
-		dados = new Dados(Janela1);
+		//pega janela do tabuleiro
+		Janela1 = tabuleiro.getBoard(Janela1);
 		
-		//botaõ de teste para trocar simbolo
-		swit = new JButton("SWITCH");
-		swit.setBounds(5, 5, 80, 50);
-		swit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		swit.setBackground(new Color(26,148,49));
-		swit.setMargin(margem);
-		swit.setToolTipText("Trocar o simbolo");
-		swit.setFocusPainted(false); //remove o retangulo ao redor do texto
-		Janela1.getContentPane().add(swit);
-		
-		
-		
-		//seta a imagem do tabuleiro
-		tabuleiro = new JLabel();
-		tabuleiro.setIcon(tabu_icon);
-		tabuleiro.setBounds(140, 50, 450, 450);
-		Janela1.getContentPane().add(tabuleiro);
-		
-		//plano de fundo
-		pdf = new JLabel();
-		pdf.setIcon(pDeF);
-		pdf.setBounds(0, -20, 750, 600);
-		Janela1.getContentPane().add(pdf);
-		
-		
-		
-		swit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dados.SwitchSymbol();	
-			}
-		});
-	
 	}
 
 }

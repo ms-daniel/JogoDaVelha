@@ -7,5 +7,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="resources/sounds.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

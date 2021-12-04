@@ -1,6 +1,12 @@
 package Principal;
 
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -13,46 +19,65 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
-public class Dados extends Thread{
+public class IniciarTabuleiro extends Thread{
 	//janela criada anteriormente 
-	private JFrame Janela1;
+		private JFrame Janela1;
 
-	//sons
-	private AudioInputStream click;
-	
-	//usado para saber quais botoes foram clicados
-	private boolean[] clicked = {
-			false,false,false,
-			false,false,false,
-			false,false,false
-	};
-	
-	private Clip oClip;
-	
-	//imagens dos icones
-	private ImageIcon x = new ImageIcon(
-			getClass().getClassLoader().getResource("x.png"));
-	
-	private ImageIcon o = new ImageIcon(
-			getClass().getClassLoader().getResource("o.png"));
-	
-	//seu icone
-	private ImageIcon sim = x;
-	
-	//declração dos botões
-	private JButton bTabu1 = new JButton();
-	private JButton bTabu2 = new JButton();
-	private JButton bTabu3 = new JButton();
-	private JButton bTabu4 = new JButton();
-	private JButton bTabu5 = new JButton();
-	private JButton bTabu6 = new JButton();
-	private JButton bTabu7 = new JButton();
-	private JButton bTabu8 = new JButton();
-	private JButton bTabu9 = new JButton();
-	
-	public Dados(JFrame Janela1) {
+		//sons
+		private AudioInputStream click;
 		
+		//usado para saber quais botoes foram clicados
+		private boolean[] clicked = {
+				false,false,false,
+				false,false,false,
+				false,false,false
+		};
+		//som ao clicar
+		private Clip oClip;
+		
+		//label's
+		private JLabel tabuleiro;
+		private JLabel pdf;
+		
+		//imagens dos icones
+		private ImageIcon x = new ImageIcon(
+				getClass().getClassLoader().getResource("x.png"));
+		
+		private ImageIcon o = new ImageIcon(
+				getClass().getClassLoader().getResource("o.png"));
+		
+		//seu icone
+		private ImageIcon sim = x;
+		
+		//imagens
+		private ImageIcon pDeF = new ImageIcon(
+				getClass().getClassLoader().getResource("backgroundU.jpg"));
+		
+		private ImageIcon tabu_icon = new ImageIcon(
+				getClass().getClassLoader().getResource("tabuleiro.png"));
+		
+		//fim iamgens
+		
+		private Insets margem = new Insets(0,0,0,0);
+		
+		//botao de switch(troca)
+		private JButton swit;
+		
+		//declração dos botões
+		private JButton bTabu1 = new JButton();
+		private JButton bTabu2 = new JButton();
+		private JButton bTabu3 = new JButton();
+		private JButton bTabu4 = new JButton();
+		private JButton bTabu5 = new JButton();
+		private JButton bTabu6 = new JButton();
+		private JButton bTabu7 = new JButton();
+		private JButton bTabu8 = new JButton();
+		private JButton bTabu9 = new JButton();
+	
+	public IniciarTabuleiro() {
+
 		try {
 			LoadSounds();
 		} catch (UnsupportedAudioFileException e2) {
@@ -63,70 +88,68 @@ public class Dados extends Thread{
 			e2.printStackTrace();
 		}
 		
-		this.Janela1 = Janela1;
 		//botões tabuleiro
 		bTabu1.setBounds(149, 61, 140, 140);
 		bTabu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu1.setFocusable(false);
 		bTabu1.setContentAreaFilled(false);
 		bTabu1.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu1);
 				
 		bTabu2.setBounds(293, 61, 140, 140);
 		bTabu2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu2.setFocusable(false);
 		bTabu2.setContentAreaFilled(false);
 		bTabu2.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu2);
+
 				
 		bTabu3.setBounds(440, 61, 140, 140);
 		bTabu3.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu3.setFocusable(false);
 		bTabu3.setContentAreaFilled(false);
 		bTabu3.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu3);
+
 
 		bTabu4.setBounds(149, 207, 140, 140);
 		bTabu4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu4.setFocusable(false);
 		bTabu4.setContentAreaFilled(false);
 		bTabu4.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu4);
+		
 				
 		bTabu5.setBounds(293, 207, 140, 140);
 		bTabu5.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu5.setFocusable(false);
 		bTabu5.setContentAreaFilled(false);
 		bTabu5.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu5);
+
 				
 		bTabu6.setBounds(440, 207, 140, 140);
 		bTabu6.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu6.setFocusable(false);
 		bTabu6.setContentAreaFilled(false);
 		bTabu6.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu6);
+
 				
 		bTabu7.setBounds(149, 353, 140, 140);
 		bTabu7.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu7.setFocusable(false);
 		bTabu7.setContentAreaFilled(false);
 		bTabu7.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu7);
+		
 				
 		bTabu8.setBounds(293, 353, 140, 140);
 		bTabu8.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu8.setFocusable(false);
 		bTabu8.setContentAreaFilled(false);
 		bTabu8.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu8);
+
 				
 		bTabu9.setBounds(440, 353, 140, 140);
 		bTabu9.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bTabu9.setFocusable(false);
 		bTabu9.setContentAreaFilled(false);
 		bTabu9.setBorderPainted(false);
-		Janela1.getContentPane().add(bTabu9);
+		
 		
 		//ações dentro dos botoes
 		bTabu1.addMouseListener(new MouseAdapter() {
@@ -409,8 +432,56 @@ public class Dados extends Thread{
 				    		bTabu9.setIcon(null);
 				    }
 				});
+
+		//botaõ de teste para trocar simbolo
+		swit = new JButton("SWITCH");
+		swit.setBounds(5, 5, 80, 50);
+		swit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		swit.setBackground(new Color(26,148,49));
+		swit.setMargin(margem);
+		swit.setToolTipText("Trocar o simbolo");
+		swit.setFocusPainted(false); //remove o retangulo ao redor do texto
+		
+				
+		//seta a imagem do tabuleiro
+		tabuleiro = new JLabel();
+		tabuleiro.setIcon(tabu_icon);
+		tabuleiro.setBounds(140, 50, 450, 450);
+				
+		//plano de fundo
+		pdf = new JLabel();
+		pdf.setIcon(pDeF);
+		pdf.setBounds(0, -20, 750, 600);
+				
+		swit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SwitchSymbol();	
+			}
+		});
+		
 		
 	}
+	
+	public JFrame getBoard(JFrame Jan) {
+		Janela1 = Jan;
+		
+		Janela1.getContentPane().add(bTabu1);
+		Janela1.getContentPane().add(bTabu2);
+		Janela1.getContentPane().add(bTabu3);
+		Janela1.getContentPane().add(bTabu4);
+		Janela1.getContentPane().add(bTabu5);
+		Janela1.getContentPane().add(bTabu6);
+		Janela1.getContentPane().add(bTabu7);
+		Janela1.getContentPane().add(bTabu8);
+		Janela1.getContentPane().add(bTabu9);
+		
+		Janela1.getContentPane().add(swit);
+		Janela1.getContentPane().add(tabuleiro);
+		Janela1.getContentPane().add(pdf);
+		
+		return this.Janela1;
+	}
+	
 	
 	public void SwitchSymbol() {
 		if(sim.equals(x)) {
@@ -454,7 +525,7 @@ public class Dados extends Thread{
 	
 	private void LoadSounds() throws UnsupportedAudioFileException, IOException {
 		this.click = AudioSystem.getAudioInputStream(
-				getClass().getClassLoader().getResource("sounds/awn.wav"));
+				getClass().getClassLoader().getResource("awn.wav"));
 		
 		try {
 			this.oClip = AudioSystem.getClip();
@@ -469,5 +540,5 @@ public class Dados extends Thread{
 		botao.setIcon(sim);
 		clicked[n] = true;
 	}
-
+	
 }
