@@ -31,7 +31,11 @@ public class Nucleo {
 	private JButton bIni;
 	private JButton bServ;
 	
+<<<<<<< HEAD
 	private IniciarTabuleiro tabuleiro = new IniciarTabuleiro();
+=======
+	private IniciarTabuleiro tabuleiro;
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a
 	
 	
 	public static void main(String[] args) {
@@ -59,8 +63,12 @@ public class Nucleo {
 		Janela1.setIconImage(logo.getImage());
 		Janela1.getContentPane().setLayout(null);
 		
+<<<<<<< HEAD
 		//pega janela do tabuleiro
 		Janela1 = tabuleiro.getBoard(Janela1);
+=======
+		tabuleiro = new IniciarTabuleiro(Janela1);
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a
 		
 	}
 

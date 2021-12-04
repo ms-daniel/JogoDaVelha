@@ -76,7 +76,11 @@ public class IniciarTabuleiro extends Thread{
 		private JButton bTabu8 = new JButton();
 		private JButton bTabu9 = new JButton();
 	
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
 	public IniciarTabuleiro() {
+=======
+	public IniciarTabuleiro(JFrame Janela) {
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 
 		try {
 			LoadSounds();
@@ -88,6 +92,10 @@ public class IniciarTabuleiro extends Thread{
 			e2.printStackTrace();
 		}
 		
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
+=======
+		this.Janela1 = Janela;
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 		//botões tabuleiro
 		bTabu1.setBounds(149, 61, 140, 140);
 		bTabu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -441,17 +449,29 @@ public class IniciarTabuleiro extends Thread{
 		swit.setMargin(margem);
 		swit.setToolTipText("Trocar o simbolo");
 		swit.setFocusPainted(false); //remove o retangulo ao redor do texto
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
 		
+=======
+		Janela1.getContentPane().add(swit);
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 				
 		//seta a imagem do tabuleiro
 		tabuleiro = new JLabel();
 		tabuleiro.setIcon(tabu_icon);
 		tabuleiro.setBounds(140, 50, 450, 450);
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
+=======
+		Janela1.getContentPane().add(tabuleiro);
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 				
 		//plano de fundo
 		pdf = new JLabel();
 		pdf.setIcon(pDeF);
 		pdf.setBounds(0, -20, 750, 600);
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
+=======
+		Janela1.getContentPane().add(pdf);
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 				
 		swit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -459,11 +479,14 @@ public class IniciarTabuleiro extends Thread{
 			}
 		});
 		
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
 		
 	}
 	
 	public JFrame getBoard(JFrame Jan) {
 		Janela1 = Jan;
+=======
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 		
 		Janela1.getContentPane().add(bTabu1);
 		Janela1.getContentPane().add(bTabu2);
@@ -482,6 +505,13 @@ public class IniciarTabuleiro extends Thread{
 		return this.Janela1;
 	}
 	
+<<<<<<< HEAD:src/Principal/IniciarTabuleiro.java
+=======
+	public JFrame getBoard() {
+		return this.Janela1;
+	}
+	
+>>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a:src/Principal/Dados.java
 	
 	public void SwitchSymbol() {
 		if(sim.equals(x)) {
