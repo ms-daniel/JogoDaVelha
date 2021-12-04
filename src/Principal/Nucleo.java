@@ -1,25 +1,13 @@
 package Principal;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.awt.Cursor;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 public class Nucleo {
 	private JFrame Janela1;
@@ -31,11 +19,7 @@ public class Nucleo {
 	private JButton bIni;
 	private JButton bServ;
 	
-<<<<<<< HEAD
 	private IniciarTabuleiro tabuleiro = new IniciarTabuleiro();
-=======
-	private IniciarTabuleiro tabuleiro;
->>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a
 	
 	
 	public static void main(String[] args) {
@@ -63,12 +47,8 @@ public class Nucleo {
 		Janela1.setIconImage(logo.getImage());
 		Janela1.getContentPane().setLayout(null);
 		
-<<<<<<< HEAD
 		//pega janela do tabuleiro
 		Janela1 = tabuleiro.getBoard(Janela1);
-=======
-		tabuleiro = new IniciarTabuleiro(Janela1);
->>>>>>> 267b7fbb535011ba34aa3c96c742dbb73d33401a
 		
 	}
 
