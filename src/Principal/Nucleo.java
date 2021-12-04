@@ -31,30 +31,7 @@ public class Nucleo {
 	private JButton bIni;
 	private JButton bServ;
 	
-	
-	//label's
-	private JLabel tabuleiro;
-	private JLabel pdf;
-	
-	//fim label's
-	
-	//iamgens
-	private ImageIcon pDeF = new ImageIcon(
-			getClass().getClassLoader().getResource("backgroundU.jpg"));
-	
-	private ImageIcon tabu_icon = new ImageIcon(
-			getClass().getClassLoader().getResource("tabuleiro.png"));
-	
-	//fim iamgens
-	
-	private IniciarTabuleiro tabul;
-	
-	//botões do tabuleiro
-	
-	
-	private Insets margem = new Insets(0,0,0,0);
-	//
-	private JButton swit;
+	private IniciarTabuleiro tabuleiro;
 	
 	
 	public static void main(String[] args) {
@@ -82,8 +59,8 @@ public class Nucleo {
 		Janela1.setIconImage(logo.getImage());
 		Janela1.getContentPane().setLayout(null);
 		
+		tabuleiro = new IniciarTabuleiro(Janela1);
 		
-	
 	}
 
 }

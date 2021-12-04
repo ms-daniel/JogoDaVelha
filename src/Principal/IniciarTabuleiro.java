@@ -1,6 +1,12 @@
 package Principal;
 
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -13,46 +19,65 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
-public class Dados extends Thread{
+public class IniciarTabuleiro extends Thread{
 	//janela criada anteriormente 
-	private JFrame Janela1;
+		private JFrame Janela1;
 
-	//sons
-	private AudioInputStream click;
-	
-	//usado para saber quais botoes foram clicados
-	private boolean[] clicked = {
-			false,false,false,
-			false,false,false,
-			false,false,false
-	};
-	
-	private Clip oClip;
-	
-	//imagens dos icones
-	private ImageIcon x = new ImageIcon(
-			getClass().getClassLoader().getResource("x.png"));
-	
-	private ImageIcon o = new ImageIcon(
-			getClass().getClassLoader().getResource("o.png"));
-	
-	//seu icone
-	private ImageIcon sim = x;
-	
-	//declração dos botões
-	private JButton bTabu1 = new JButton();
-	private JButton bTabu2 = new JButton();
-	private JButton bTabu3 = new JButton();
-	private JButton bTabu4 = new JButton();
-	private JButton bTabu5 = new JButton();
-	private JButton bTabu6 = new JButton();
-	private JButton bTabu7 = new JButton();
-	private JButton bTabu8 = new JButton();
-	private JButton bTabu9 = new JButton();
-	
-	public Dados(JFrame Janela1) {
+		//sons
+		private AudioInputStream click;
 		
+		//usado para saber quais botoes foram clicados
+		private boolean[] clicked = {
+				false,false,false,
+				false,false,false,
+				false,false,false
+		};
+		//som ao clicar
+		private Clip oClip;
+		
+		//label's
+		private JLabel tabuleiro;
+		private JLabel pdf;
+		
+		//imagens dos icones
+		private ImageIcon x = new ImageIcon(
+				getClass().getClassLoader().getResource("x.png"));
+		
+		private ImageIcon o = new ImageIcon(
+				getClass().getClassLoader().getResource("o.png"));
+		
+		//seu icone
+		private ImageIcon sim = x;
+		
+		//imagens
+		private ImageIcon pDeF = new ImageIcon(
+				getClass().getClassLoader().getResource("backgroundU.jpg"));
+		
+		private ImageIcon tabu_icon = new ImageIcon(
+				getClass().getClassLoader().getResource("tabuleiro.png"));
+		
+		//fim iamgens
+		
+		private Insets margem = new Insets(0,0,0,0);
+		
+		//botao de switch(troca)
+		private JButton swit;
+		
+		//declração dos botões
+		private JButton bTabu1 = new JButton();
+		private JButton bTabu2 = new JButton();
+		private JButton bTabu3 = new JButton();
+		private JButton bTabu4 = new JButton();
+		private JButton bTabu5 = new JButton();
+		private JButton bTabu6 = new JButton();
+		private JButton bTabu7 = new JButton();
+		private JButton bTabu8 = new JButton();
+		private JButton bTabu9 = new JButton();
+	
+	public IniciarTabuleiro(JFrame Janela) {
+
 		try {
 			LoadSounds();
 		} catch (UnsupportedAudioFileException e2) {
@@ -63,7 +88,7 @@ public class Dados extends Thread{
 			e2.printStackTrace();
 		}
 		
-		this.Janela1 = Janela1;
+		this.Janela1 = Janela;
 		//botões tabuleiro
 		bTabu1.setBounds(149, 61, 140, 140);
 		bTabu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -409,8 +434,42 @@ public class Dados extends Thread{
 				    		bTabu9.setIcon(null);
 				    }
 				});
+
+		//botaõ de teste para trocar simbolo
+		swit = new JButton("SWITCH");
+		swit.setBounds(5, 5, 80, 50);
+		swit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		swit.setBackground(new Color(26,148,49));
+		swit.setMargin(margem);
+		swit.setToolTipText("Trocar o simbolo");
+		swit.setFocusPainted(false); //remove o retangulo ao redor do texto
+		Janela1.getContentPane().add(swit);
+				
+		//seta a imagem do tabuleiro
+		tabuleiro = new JLabel();
+		tabuleiro.setIcon(tabu_icon);
+		tabuleiro.setBounds(140, 50, 450, 450);
+		Janela1.getContentPane().add(tabuleiro);
+				
+		//plano de fundo
+		pdf = new JLabel();
+		pdf.setIcon(pDeF);
+		pdf.setBounds(0, -20, 750, 600);
+		Janela1.getContentPane().add(pdf);
+				
+		swit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SwitchSymbol();	
+			}
+		});
+		
 		
 	}
+	
+	public JFrame getBoard() {
+		return this.Janela1;
+	}
+	
 	
 	public void SwitchSymbol() {
 		if(sim.equals(x)) {
@@ -454,7 +513,7 @@ public class Dados extends Thread{
 	
 	private void LoadSounds() throws UnsupportedAudioFileException, IOException {
 		this.click = AudioSystem.getAudioInputStream(
-				getClass().getClassLoader().getResource("sounds/awn.wav"));
+				getClass().getClassLoader().getResource("awn.wav"));
 		
 		try {
 			this.oClip = AudioSystem.getClip();
@@ -469,5 +528,5 @@ public class Dados extends Thread{
 		botao.setIcon(sim);
 		clicked[n] = true;
 	}
-
+	
 }
