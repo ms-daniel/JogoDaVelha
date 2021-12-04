@@ -3,7 +3,6 @@ package Principal;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +34,7 @@ public class IniciarTabuleiro extends Thread{
 				false,false,false
 		};
 		//som ao clicar
-		private Clip oClip;
+		private Clip click_sound;
 		
 		//label's
 		private JLabel tabuleiro;
@@ -162,7 +161,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[0]) {
 				    		setButtonIcon(bTabu1, 0);
-				    	    oClip.setMicrosecondPosition(0);
+				    	    click_sound.setMicrosecondPosition(0);
 
 				    	    try {
 								sleep(10);
@@ -170,7 +169,7 @@ public class IniciarTabuleiro extends Thread{
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-				    	    oClip.start();
+				    	    click_sound.start();
 				    	    
 				    	}
 				    }
@@ -193,7 +192,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[1]) {
 				    		setButtonIcon(bTabu2, 1);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -202,7 +201,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -224,7 +223,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[2]) {
 				    		setButtonIcon(bTabu3, 2);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -233,7 +232,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -255,7 +254,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[3]) {
 				    		setButtonIcon(bTabu4, 3);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -264,7 +263,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -286,7 +285,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[4]) {
 				    		setButtonIcon(bTabu5, 4);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -295,7 +294,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -317,7 +316,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[5]) {
 				    		setButtonIcon(bTabu6, 5);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -326,7 +325,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -348,7 +347,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[6]) {
 				    		setButtonIcon(bTabu7, 6);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -357,7 +356,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -379,7 +378,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[7]) {
 				    		setButtonIcon(bTabu8, 7);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -388,7 +387,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -412,7 +411,7 @@ public class IniciarTabuleiro extends Thread{
 				    public void mouseClicked(MouseEvent e) {
 				    	if(!clicked[8]) {
 				    		setButtonIcon(bTabu9, 8);
-				    		oClip.setMicrosecondPosition(0);
+				    		click_sound.setMicrosecondPosition(0);
 				    		
 				    		try {
 								sleep(10);
@@ -421,7 +420,7 @@ public class IniciarTabuleiro extends Thread{
 								e1.printStackTrace();
 							}
 				    		
-				    		oClip.start();
+				    		click_sound.start();
 				    	}
 				    }
 				 
@@ -461,6 +460,7 @@ public class IniciarTabuleiro extends Thread{
 		
 	}
 	
+	//passa todos os componentes pro Frame principal 
 	public JFrame getBoard(JFrame Jan) {
 		Janela1 = Jan;
 		
@@ -481,7 +481,7 @@ public class IniciarTabuleiro extends Thread{
 		return this.Janela1;
 	}
 	
-	
+	//troca o simbolo 
 	public void SwitchSymbol() {
 		if(sim.equals(x)) {
 			SwitchB(o);
@@ -522,19 +522,21 @@ public class IniciarTabuleiro extends Thread{
 			bTabu9.setIcon(s);
 	}
 	
+	//carrega os sons dos clicks
 	private void LoadSounds() throws UnsupportedAudioFileException, IOException {
 		this.click = AudioSystem.getAudioInputStream(
 				getClass().getClassLoader().getResource("awn.wav"));
 		
 		try {
-			this.oClip = AudioSystem.getClip();
-			oClip.open(click);
+			this.click_sound = AudioSystem.getClip();
+			click_sound.open(click);
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	//muda o estado do botão ao clicar nele
 	private void setButtonIcon(JButton botao, int n) {
 		botao.setIcon(sim);
 		clicked[n] = true;
