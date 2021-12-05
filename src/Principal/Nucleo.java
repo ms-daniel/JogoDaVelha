@@ -19,8 +19,11 @@ public class Nucleo {
 	private JButton bIni;
 	private JButton bServ;
 	
+	//instancia um objeto que cria os componentes da tela de tabuleiro
 	private IniciarTabuleiro tabuleiro = new IniciarTabuleiro();
 	
+	//instancia um objeto que cria os componentes do menu
+	private Menu menu = new Menu();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,7 +51,9 @@ public class Nucleo {
 		Janela1.getContentPane().setLayout(null);
 		
 		//pega janela do tabuleiro
-		Janela1 = tabuleiro.getBoard(Janela1);
+		//Janela1 = tabuleiro.getBoard(Janela1);
+		
+		Janela1 = menu.getBoard(Janela1);
 		
 	}
 
