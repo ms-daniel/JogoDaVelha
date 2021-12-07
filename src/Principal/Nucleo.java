@@ -1,6 +1,8 @@
 package Principal;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 
@@ -14,10 +16,7 @@ public class Nucleo {
 	private ImageIcon logo = new ImageIcon(
 			getClass().getClassLoader().getResource("logo.jpg"));
 	
-	//menu inicial
-	private JLabel pdf_ini;
-	private JButton bIni;
-	private JButton bServ;
+	private JButton bIniMenu;
 	
 	//instancia um objeto que cria os componentes da tela de tabuleiro
 	private IniciarTabuleiro tabuleiro = new IniciarTabuleiro();
@@ -45,15 +44,24 @@ public class Nucleo {
 	private void initialize() throws IOException {
 		//cria a janela
 		Janela1 = new JFrame("Jogo da Velha");
-		Janela1.setBounds(320, 80, 750, 600);
+		Janela1.setBounds(0, 0, 750, 600);
+		Janela1.setLocationRelativeTo(null); //alinha a janela no centro da tela
 		Janela1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Janela1.setIconImage(logo.getImage());
+		Janela1.setIconImage(logo.getImage()); //define o icone da aplicação
 		Janela1.getContentPane().setLayout(null);
 		
 		//pega janela do tabuleiro
-		//Janela1 = tabuleiro.getBoard(Janela1);
+//		Janela1 = tabuleiro.getBoard(Janela1);
 		
 		Janela1 = menu.getBoard(Janela1);
+		
+		bIniMenu = menu.getBIni();
+		
+		bIniMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("apertou");
+			}
+		});
 		
 	}
 
