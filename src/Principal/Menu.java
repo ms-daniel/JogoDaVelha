@@ -117,9 +117,7 @@ public class Menu {
 		//jlabel da imagem para fundo
 		fundo = new JLabel();
 		fundo.setIcon(img_F);
-		fundo.setBounds(0, -20, 750, 600);	
-		
-		System.out.println("Dan: " + ip.getText());
+		fundo.setBounds(0, -20, 750, 600);
 		
 		if(!ip.getText().equals(new String(""))) {
 			bIni.setEnabled(true);
@@ -189,5 +187,22 @@ public class Menu {
 	//e melhorar o gerenciamento do servidor
 	public JButton getBIni() {
 		return bIni;
+	}
+	//retornar ip e porta
+	public String getIp() {
+		return this.Ip_serv;
+	}
+	public int getPort() {
+		return Integer.parseInt(this.Port_serv);
+	}
+	
+	//seta port ou ip
+	public void resetPort() {
+		this.Port_serv = "";
+		this.port.setText("");
+	}
+	public void resetIp() {
+		this.Ip_serv = "";
+		this.ip.setText("");
 	}
 }

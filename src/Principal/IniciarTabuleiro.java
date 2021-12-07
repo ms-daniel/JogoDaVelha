@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -49,6 +50,9 @@ public class IniciarTabuleiro extends Thread{
 		
 		//seu icone
 		private ImageIcon sim = x;
+		private ImageIcon nao = o;
+		
+		private int[][] matriz = new int[3][3];
 		
 		//imagens
 		private ImageIcon pDeF = new ImageIcon(
@@ -76,7 +80,11 @@ public class IniciarTabuleiro extends Thread{
 		private JButton bTabu9 = new JButton();
 	
 	public IniciarTabuleiro() {
-
+		//preenche a matriz com 0
+		for(int i= 0; i<3; i++) {
+			Arrays.fill(matriz[i], 0);
+		}
+			
 		try {
 			LoadSounds();
 		} catch (UnsupportedAudioFileException e2) {
