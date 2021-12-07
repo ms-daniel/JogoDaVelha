@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -78,7 +80,11 @@ public class IniciarTabuleiro extends Thread{
 		private JButton bTabu7 = new JButton();
 		private JButton bTabu8 = new JButton();
 		private JButton bTabu9 = new JButton();
-	
+		
+		//entrada e saida de dados
+		private BufferedReader conexao_entrada; 
+		private DataOutputStream conexao_saida;
+
 	public IniciarTabuleiro() {
 		//preenche a matriz com 0
 		for(int i= 0; i<3; i++) {
@@ -468,6 +474,11 @@ public class IniciarTabuleiro extends Thread{
 		
 	}
 	
+	
+	public void run(){
+		DisableButtons();
+	}
+	
 	//passa todos os componentes pro Frame principal 
 	public JFrame getBoard(JFrame Jan) {
 		Janela1 = Jan;
@@ -548,6 +559,39 @@ public class IniciarTabuleiro extends Thread{
 	private void setButtonIcon(JButton botao, int n) {
 		botao.setIcon(sim);
 		clicked[n] = true;
+	}
+	
+	public void setInput(BufferedReader in) {
+		this.conexao_entrada = in;
+	}
+	
+	public void setOutput(DataOutputStream out) {
+		this.conexao_saida = out;
+	}
+	
+	//desativa os botoes
+	private void DisableButtons() {
+		bTabu1.setEnabled(false);
+		bTabu2.setEnabled(false);
+		bTabu3.setEnabled(false);
+		bTabu4.setEnabled(false);
+		bTabu5.setEnabled(false);
+		bTabu6.setEnabled(false);
+		bTabu7.setEnabled(false);
+		bTabu8.setEnabled(false);
+		bTabu9.setEnabled(false);
+	}
+	//ativa os botoes
+	private void EnableButtons(){
+		bTabu1.setEnabled(true);
+		bTabu2.setEnabled(true);
+		bTabu3.setEnabled(true);
+		bTabu4.setEnabled(true);
+		bTabu5.setEnabled(true);
+		bTabu6.setEnabled(true);
+		bTabu7.setEnabled(true);
+		bTabu8.setEnabled(true);
+		bTabu9.setEnabled(true);
 	}
 	
 }

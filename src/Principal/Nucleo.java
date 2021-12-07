@@ -4,7 +4,10 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -84,6 +87,26 @@ public class Nucleo {
 					Janela1.getContentPane().removeAll();
 					Janela1.repaint();
 					Janela1 = tabuleiro.getBoard(Janela1);
+					
+					//tenta ligar a entrada de dados
+					try {
+						tabuleiro.setInput(new BufferedReader(
+								new InputStreamReader(conexao.getInputStream())));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					//tenta ligar a saida de dados
+					try {
+						tabuleiro.setOutput(new DataOutputStream(
+								conexao.getOutputStream()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					tabuleiro.start();
 				}
 			}
 		});
