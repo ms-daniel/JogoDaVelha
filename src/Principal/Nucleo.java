@@ -69,6 +69,7 @@ public class Nucleo {
 					conexao = new Socket(menu.getIp(),menu.getPort());
 					
 				}catch(IllegalArgumentException e) {
+					System.out.println(menu.getPort());
 					JOptionPane.showMessageDialog(Janela1, "Porta não está no intervalo permitido!", "Port Error", 0); 
 					menu.resetPort();
 				}catch(UnknownHostException e) {

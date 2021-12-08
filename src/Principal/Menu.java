@@ -103,12 +103,16 @@ public class Menu {
 		ip.setBounds(250, 220, 200, 30);
 		ip.setFont(new Font("Arial", Font.PLAIN, 16));
 		
+		ip.setText("192.168.0.196");
+		
 		port = new JTextField("");
 		port.setHorizontalAlignment(JTextField.CENTER);
 		port.setBounds(250, 280, 200, 30);
 		port.setToolTipText("Ex.: 25565");
 		port.setDocument(new JTextFieldLimit(5));
 		port.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		port.setText("9000");
 		
 		//
 		teste = new JLabel(ip.getText());
@@ -190,9 +194,11 @@ public class Menu {
 	}
 	//retornar ip e porta
 	public String getIp() {
+		Ip_serv = ip.getText();
 		return this.Ip_serv;
 	}
 	public int getPort() {
+		Port_serv = port.getText();
 		return Integer.parseInt(this.Port_serv);
 	}
 	
@@ -202,6 +208,7 @@ public class Menu {
 		this.port.setText("");
 	}
 	public void resetIp() {
+		
 		this.Ip_serv = "";
 		this.ip.setText("");
 	}

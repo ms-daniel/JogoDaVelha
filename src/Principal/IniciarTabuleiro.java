@@ -162,7 +162,6 @@ public class IniciarTabuleiro extends Thread{
 		bTabu9.setContentAreaFilled(false);
 		bTabu9.setBorderPainted(false);
 		
-		
 		//ações dentro dos botoes
 		bTabu1.addMouseListener(new MouseAdapter() {
 				    @Override
@@ -173,7 +172,7 @@ public class IniciarTabuleiro extends Thread{
 				 
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[0]) {
+				    	if(!clicked[0] && bTabu1.isEnabled()) {
 				    		setButtonIcon(bTabu1, 0);
 				    	    click_sound.setMicrosecondPosition(0);
 
@@ -204,7 +203,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[1]) {
+				    	if(!clicked[1] && bTabu2.isEnabled()) {
 				    		setButtonIcon(bTabu2, 1);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -235,7 +234,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[2]) {
+				    	if(!clicked[2] && bTabu3.isEnabled()) {
 				    		setButtonIcon(bTabu3, 2);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -266,7 +265,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[3]) {
+				    	if(!clicked[3] && bTabu4.isEnabled()) {
 				    		setButtonIcon(bTabu4, 3);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -297,7 +296,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[4]) {
+				    	if(!clicked[4] && bTabu5.isEnabled()) {
 				    		setButtonIcon(bTabu5, 4);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -328,7 +327,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[5]) {
+				    	if(!clicked[5] && bTabu6.isEnabled()) {
 				    		setButtonIcon(bTabu6, 5);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -359,7 +358,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[6]) {
+				    	if(!clicked[6] && bTabu7.isEnabled()) {
 				    		setButtonIcon(bTabu7, 6);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -390,7 +389,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[7]) {
+				    	if(!clicked[7] && bTabu8.isEnabled()) {
 				    		setButtonIcon(bTabu8, 7);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -423,7 +422,7 @@ public class IniciarTabuleiro extends Thread{
 				    
 				    @Override
 				    public void mouseClicked(MouseEvent e) {
-				    	if(!clicked[8]) {
+				    	if(!clicked[8] && bTabu9.isEnabled()) {
 				    		setButtonIcon(bTabu9, 8);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
@@ -477,6 +476,7 @@ public class IniciarTabuleiro extends Thread{
 	
 	public void run(){
 		DisableButtons();
+		
 	}
 	
 	//passa todos os componentes pro Frame principal 
