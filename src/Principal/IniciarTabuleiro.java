@@ -20,13 +20,15 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class IniciarTabuleiro extends Thread{
 	//janela criada anteriormente 
 		private JFrame Janela1;
-
+		
 		//sons
 		private AudioInputStream click;
 		
@@ -476,6 +478,7 @@ public class IniciarTabuleiro extends Thread{
 	
 	public void run(){
 		DisableButtons();
+		DisableAll();
 		
 	}
 	
@@ -581,6 +584,13 @@ public class IniciarTabuleiro extends Thread{
 		bTabu8.setEnabled(false);
 		bTabu9.setEnabled(false);
 	}
+	
+	private void DisableAll() {
+		tabuleiro.setEnabled(false);
+		pdf.setEnabled(false);
+		swit.setEnabled(false);
+	}
+	
 	//ativa os botoes
 	private void EnableButtons(){
 		bTabu1.setEnabled(true);
@@ -594,4 +604,5 @@ public class IniciarTabuleiro extends Thread{
 		bTabu9.setEnabled(true);
 	}
 	
+
 }
