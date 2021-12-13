@@ -67,7 +67,8 @@ public class Nucleo {
 				//tentara se conectar ao servidor especificado na tela menu
 				try {
 					conexao = new Socket(menu.getIp(),menu.getPort());
-					
+				
+				//tratamento de exceções
 				}catch(IllegalArgumentException e) {
 					System.out.println(menu.getPort());
 					JOptionPane.showMessageDialog(Janela1, "Porta não está no intervalo permitido!", "Port Error", 0); 
@@ -75,9 +76,9 @@ public class Nucleo {
 				}catch(UnknownHostException e) {
 					JOptionPane.showMessageDialog(Janela1, "Houve algum problema com o IP");
 					menu.resetIp();
-				}catch(SecurityException e) {
+				}catch(SecurityException e) {//problema de segurança
 					JOptionPane.showMessageDialog(Janela1, "Houve algum problema de segurança", "Security Error", 0);
-				}catch(IOException e) {
+				}catch(IOException e) { //problema com conexao com servidor
 					JOptionPane.showMessageDialog(Janela1, "Houve algum problema de execução ou com conexão ao servidor", "I/O Error", 0);
 				}finally {
 					Janela1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -85,8 +86,13 @@ public class Nucleo {
 				
 				if(conexao != null && conexao.isConnected()) {
 					JOptionPane.showMessageDialog(Janela1, "Conectado a partida!");
+					
+					//remove todos os components do menu
 					Janela1.getContentPane().removeAll();
-					Janela1.repaint();
+					Janela1.repaint(); //repinta a tela
+					
+					//abre o tabuleiro
+					tabuleiro.setSocket(conexao);
 					Janela1 = tabuleiro.getBoard(Janela1);
 					
 					//tenta ligar a entrada de dados
@@ -114,6 +120,7 @@ public class Nucleo {
 		
 	}
 	
+	//apenas para iniciar a tela inicial
 	private JFrame StartWindows(JFrame Janela) {
 		Janela.setBounds(0, 0, 750, 600);
 		Janela.setLocationRelativeTo(null); //alinha a janela no centro da tela

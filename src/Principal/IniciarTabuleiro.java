@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Arrays;
 
 import javax.sound.sampled.AudioInputStream;
@@ -28,6 +29,9 @@ import javax.swing.JOptionPane;
 public class IniciarTabuleiro extends Thread{
 	//janela criada anteriormente 
 		private JFrame Janela1;
+		
+		//classe do aviso de "esperando outro jogador"
+		private LoadThread load = new LoadThread();
 		
 		//sons
 		private AudioInputStream click;
@@ -84,6 +88,7 @@ public class IniciarTabuleiro extends Thread{
 		private JButton bTabu9 = new JButton();
 		
 		//entrada e saida de dados
+		private Socket conexao;
 		private BufferedReader conexao_entrada; 
 		private DataOutputStream conexao_saida;
 
@@ -477,9 +482,36 @@ public class IniciarTabuleiro extends Thread{
 	
 	
 	public void run(){
+		boolean close = true;
 		DisableButtons();
 		DisableAll();
+		load.start();
+		while(close) 
+			try {
+				//espera outro jogador, avisado pelo servidor
+				//se o servidor mandar "sair" é pq houve algum erro
+				if(conexao_entrada.readLine().equals("sair")) {
+					conexao.close();
+					conexao_entrada.close();
+					conexao_saida.close();
+					load.close();
+					JOptionPane.showMessageDialog(null, "Disconectado!");
+					close = false;
+				}
+				else {
+					
+				}
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(Janela1, "Algum erro I/O ocorreu ):");
+				close = false;
+				e.printStackTrace();
+			}
+
 		
+	}
+	
+	public void setSocket(Socket conec) {
+		this.conexao = conec;
 	}
 	
 	//passa todos os componentes pro Frame principal 
