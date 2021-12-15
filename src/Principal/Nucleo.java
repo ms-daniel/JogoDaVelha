@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -85,7 +86,8 @@ public class Nucleo {
 				}
 				
 				if(conexao != null && conexao.isConnected()) {
-					JOptionPane.showMessageDialog(Janela1, "Conectado a partida!");
+					
+					Conectado();
 					
 					//remove todos os components do menu
 					Janela1.getContentPane().removeAll();
@@ -128,6 +130,37 @@ public class Nucleo {
 		Janela.setIconImage(this.logo.getImage()); //define o icone da aplicação
 		Janela.getContentPane().setLayout(null);
 		return Janela;
+	}
+	
+	//usado para mostrar a caixa de que foi conectado e sumir sozinho com ela
+	private void Conectado(){
+		JDialog show;
+		JOptionPane con = new JOptionPane();
+		con.setMessage("Conectado!");
+		con.setMessageType(1);
+		
+		show = con.createDialog("Servidor");
+		
+		//criação de uma thread pra poder rodar um sleep e fechar a dialog box sozinho
+		Thread paralelo =
+			    new Thread(){
+			        public void run(){
+			        	try {
+			    			Thread.sleep(800);
+			    			show.setVisible(false);
+			    			show.dispose();
+			    		} catch (InterruptedException e) {
+			    			// TODO Auto-generated catch block
+			    			e.printStackTrace();
+			    		}
+			        }
+			    };
+		paralelo.start();
+		//fim thread
+		
+		show.setVisible(true);
+		
+		
 	}
 
 }

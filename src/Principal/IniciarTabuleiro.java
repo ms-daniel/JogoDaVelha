@@ -494,6 +494,7 @@ public class IniciarTabuleiro extends Thread{
 				//espera outro jogador, avisado pelo servidor
 				//se o servidor mandar "sair" é pq houve algum erro
 				msg_serv = conexao_entrada.readLine();
+				System.out.println(msg_serv);
 				//caso ocorra algum erro o servidor manda "sair"
 				if(msg_serv.equals("sair")) {
 					conexao.close();
@@ -503,6 +504,7 @@ public class IniciarTabuleiro extends Thread{
 					JOptionPane.showMessageDialog(null, "Disconectado!");
 					close = false;
 				}
+				
 				//caso outro jogador se conect o servidor manda "D" (done)
 				else if(msg_serv.equals("D")) {
 					close = false;

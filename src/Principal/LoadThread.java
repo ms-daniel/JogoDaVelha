@@ -33,7 +33,7 @@ public class LoadThread extends Thread{
 			
 			//se o usuario resolver cancelar a conexao
 			if(escLoad == JOptionPane.CANCEL_OPTION){
-				show.setVisible(false);;
+				show.setVisible(false);
 				close = false;
 			}
 		}
