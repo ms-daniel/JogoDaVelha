@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Arrays;
 
 import javax.sound.sampled.AudioInputStream;
@@ -512,10 +513,14 @@ public class IniciarTabuleiro extends Thread{
 //				else {
 //					
 //				}
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(Janela1, "Algum erro I/O ocorreu ):");
+			} catch(SocketException e) {
+				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+				load.close();
 				close = false;
-				e.printStackTrace();
+			}catch (IOException e) {
+				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+				load.close();
+				close = false;
 			}
 		}
 		
