@@ -86,7 +86,7 @@ public class Nucleo {
 				}
 				
 				if(conexao != null && conexao.isConnected()) {
-					
+					//dialog box de conectado
 					Conectado();
 					
 					//remove todos os components do menu
@@ -159,8 +159,6 @@ public class Nucleo {
 		//fim thread
 		
 		show.setVisible(true);
-		
-		
 	}
 
 }

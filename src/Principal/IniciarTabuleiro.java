@@ -526,7 +526,9 @@ public class IniciarTabuleiro extends Thread{
 			}
 		}
 		
-		Play();
+		if(bTabu1.isEnabled()) {
+			Play();
+		}
 		
 	}
 	
@@ -663,8 +665,52 @@ public class IniciarTabuleiro extends Thread{
 	}
 	
 	private void Play() {
-		
+		String msg_serv;
+		try {
+			whoFirst();
+			msg_serv = conexao_entrada.readLine();
+			
+			if(msg_serv.equals("first")) {
+				System.out.println(msg_serv);
+			}else{
+				System.out.println(msg_serv);
+			}
+			
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	//caixa de dialogo para esperar servidor mandar quem será o primeiro
+	private void whoFirst() {
+		JDialog show;
+		JOptionPane con = new JOptionPane();
+		con.setMessage("Selecionado primeiro jogador");
+		con.setMessageType(1);
+		
+		show = con.createDialog("Sorte? Azar?");
+		
+		//criação de uma thread pra poder rodar um sleep e fechar a dialog box sozinho
+		Thread paralelo =
+			    new Thread(){
+			        public void run(){
+			        	try {
+			    			Thread.sleep(2000);
+			    			show.setVisible(false);
+			    			show.dispose();
+			    		} catch (InterruptedException e) {
+			    			// TODO Auto-generated catch block
+			    			e.printStackTrace();
+			    		}
+			        }
+			    };
+		paralelo.start();
+		//fim thread
+		
+		show.setVisible(true);
+	}
 
 }
