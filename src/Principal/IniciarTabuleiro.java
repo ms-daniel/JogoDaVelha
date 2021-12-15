@@ -686,10 +686,12 @@ public class IniciarTabuleiro extends Thread{
 	
 	//caixa de dialogo para esperar servidor mandar quem será o primeiro
 	private void whoFirst() {
+		Object[] opt = {};
 		JDialog show;
 		JOptionPane con = new JOptionPane();
 		con.setMessage("Selecionado primeiro jogador");
 		con.setMessageType(1);
+		con.setOptions(opt);
 		
 		show = con.createDialog("Sorte? Azar?");
 		
