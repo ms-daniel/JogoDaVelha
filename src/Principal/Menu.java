@@ -47,7 +47,7 @@ public class Menu {
 	
 	//plano de 
 	private ImageIcon img_F = new ImageIcon(
-			getClass().getClassLoader().getResource("backgroundI.jpg"));;
+			getClass().getClassLoader().getResource("backgroundI.jpg"));
 	private JLabel fundo;
 	
 	public Menu() {

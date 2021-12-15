@@ -486,11 +486,15 @@ public class IniciarTabuleiro extends Thread{
 		DisableButtons();
 		DisableAll();
 		load.start();
-		while(close) 
+		String msg_serv;
+		
+		while(close) {
 			try {
 				//espera outro jogador, avisado pelo servidor
 				//se o servidor mandar "sair" é pq houve algum erro
-				if(conexao_entrada.readLine().equals("sair")) {
+				msg_serv = conexao_entrada.readLine();
+				//caso ocorra algum erro o servidor manda "sair"
+				if(msg_serv.equals("sair")) {
 					conexao.close();
 					conexao_entrada.close();
 					conexao_saida.close();
@@ -498,15 +502,24 @@ public class IniciarTabuleiro extends Thread{
 					JOptionPane.showMessageDialog(null, "Disconectado!");
 					close = false;
 				}
-				else {
-					
+				//caso outro jogador se conect o servidor manda "D" (done)
+				else if(msg_serv.equals("D")) {
+					close = false;
+					load.close();
+					EnableAll();
+					EnableButtons();
 				}
+//				else {
+//					
+//				}
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(Janela1, "Algum erro I/O ocorreu ):");
 				close = false;
 				e.printStackTrace();
 			}
-
+		}
+		
+		Play();
 		
 	}
 	
@@ -634,6 +647,16 @@ public class IniciarTabuleiro extends Thread{
 		bTabu7.setEnabled(true);
 		bTabu8.setEnabled(true);
 		bTabu9.setEnabled(true);
+	}
+	
+	private void EnableAll() {
+		tabuleiro.setEnabled(true);
+		pdf.setEnabled(true);
+		swit.setEnabled(true);
+	}
+	
+	private void Play() {
+		
 	}
 	
 

@@ -100,7 +100,7 @@ public class Nucleo {
 						tabuleiro.setInput(new BufferedReader(
 								new InputStreamReader(conexao.getInputStream())));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(Janela1, "Erro ao conectar entrada de dados!");
 						e.printStackTrace();
 					}
 					
@@ -109,14 +109,14 @@ public class Nucleo {
 						tabuleiro.setOutput(new DataOutputStream(
 								conexao.getOutputStream()));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(Janela1, "Erro ao conectar saida de dados!");
 						e.printStackTrace();
 					}
 					
 					tabuleiro.start();
 				}
 			}
-		});
+		});//fim do botão
 		
 	}
 	
