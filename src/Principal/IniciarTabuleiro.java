@@ -701,14 +701,14 @@ public class IniciarTabuleiro extends Thread{
 			//Dialogo("Selecionado primeiro jogador", "Sorte ou Azar?", 2000);//msg para esperar quem será o primeiro
 			
 			String msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
-			/*
+			
 			if(msg_serv.equals("first")) {
 				Dialogo("Você será o primeiro!", "Sorte!", 2000);
 				First = true;
 			}else{
 				Dialogo("Você será o segundo!", "Azar ):", 2000);
 				First = false;
-			}*/
+			}
 			
 			while(!win) {
 				//poe timeout paras mandar resposta
@@ -716,14 +716,13 @@ public class IniciarTabuleiro extends Thread{
 					EnableButtons();
 					EnableAll();
 					
-					System.out.println("espernado leitura");
 					conexao_saida.writeBytes(getClickButton() + '\n');
 						
 					First = false;
 					DisableButtons();
 					DisableAll();
 				}
-				
+				System.out.println("wait");
 				fromServer = conexao_entrada.readLine();
 				
 				if(fromServer.matches("[0-9]+")) {
@@ -804,34 +803,39 @@ public class IniciarTabuleiro extends Thread{
 	
 	private void clickButton(int b) {
 		if(b == 1) {
-			setButtonIcon(bTabu1, 0);
+			setButtonIconAnother(bTabu1, 0);
 		}
 		else if(b == 2) {
-			setButtonIcon(bTabu2, 1);
+			setButtonIconAnother(bTabu2, 1);
 		}
 		else if(b == 3) {
-			setButtonIcon(bTabu3, 2);
+			setButtonIconAnother(bTabu3, 2);
 		}
 		else if(b == 4) {
-			setButtonIcon(bTabu4, 3);
+			setButtonIconAnother(bTabu4, 3);
 		}
 		else if(b == 5) {
-			setButtonIcon(bTabu5, 4);
+			setButtonIconAnother(bTabu5, 4);
 		}
 		else if(b == 6) {
-			setButtonIcon(bTabu6, 5);
+			setButtonIconAnother(bTabu6, 5);
 		}
 		else if(b == 7) {
-			setButtonIcon(bTabu7, 6);
+			setButtonIconAnother(bTabu7, 6);
 		}
 		else if(b == 8) {
-			setButtonIcon(bTabu8, 7);
+			setButtonIconAnother(bTabu8, 7);
 		}
 		else if(b == 9) {
-			setButtonIcon(bTabu9, 8);
+			setButtonIconAnother(bTabu9, 8);
 		}
 		else {
 			
 		}
+	}
+	
+	private void setButtonIconAnother(JButton botao, int n) {
+		botao.setIcon(nao);
+		clicked[n] = true;
 	}
 }
