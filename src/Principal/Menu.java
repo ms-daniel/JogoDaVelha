@@ -103,7 +103,7 @@ public class Menu {
 		ip.setBounds(250, 220, 200, 30);
 		ip.setFont(new Font("Arial", Font.PLAIN, 16));
 		
-		ip.setText("192.168.0.196");
+		ip.setText("192.168.0.198");
 		
 		port = new JTextField("");
 		port.setHorizontalAlignment(JTextField.CENTER);

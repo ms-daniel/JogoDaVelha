@@ -13,7 +13,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
+import java.util.concurrent.TimeoutException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -30,6 +32,11 @@ import javax.swing.JOptionPane;
 public class IniciarTabuleiro extends Thread{
 	//janela criada anteriormente 
 		private JFrame Janela1;
+		
+		private boolean First; //saber se sera o primeiro
+		private boolean win = false; //quando houver um ganhador
+		private boolean clickou = false; //saber quando clicar em um botao
+		private String toServer = ""; //msg para o servidor
 		
 		//classe do aviso de "esperando outro jogador"
 		private LoadThread load = new LoadThread();
@@ -183,7 +190,10 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[0] && bTabu1.isEnabled()) {
 				    		setButtonIcon(bTabu1, 0);
 				    	    click_sound.setMicrosecondPosition(0);
-
+				    	    
+				    	    clickou = true; //sinaliza que foi clicado
+				    	    toServer = "1"; //diz qual botao foi clicado
+				    	    
 				    	    try {
 								sleep(10);
 							} catch (InterruptedException e1) {
@@ -214,6 +224,9 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[1] && bTabu2.isEnabled()) {
 				    		setButtonIcon(bTabu2, 1);
 				    		click_sound.setMicrosecondPosition(0);
+				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "2"; //diz qual botao foi clicado
 				    		
 				    		try {
 								sleep(10);
@@ -246,6 +259,9 @@ public class IniciarTabuleiro extends Thread{
 				    		setButtonIcon(bTabu3, 2);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "3"; //diz qual botao foi clicado
+				    		
 				    		try {
 								sleep(10);
 							} catch (InterruptedException e1) {
@@ -276,6 +292,9 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[3] && bTabu4.isEnabled()) {
 				    		setButtonIcon(bTabu4, 3);
 				    		click_sound.setMicrosecondPosition(0);
+				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "4"; //diz qual botao foi clicado
 				    		
 				    		try {
 								sleep(10);
@@ -308,6 +327,9 @@ public class IniciarTabuleiro extends Thread{
 				    		setButtonIcon(bTabu5, 4);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "5"; //diz qual botao foi clicado
+				    		
 				    		try {
 								sleep(10);
 							} catch (InterruptedException e1) {
@@ -338,6 +360,9 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[5] && bTabu6.isEnabled()) {
 				    		setButtonIcon(bTabu6, 5);
 				    		click_sound.setMicrosecondPosition(0);
+				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "6"; //diz qual botao foi clicado
 				    		
 				    		try {
 								sleep(10);
@@ -370,6 +395,9 @@ public class IniciarTabuleiro extends Thread{
 				    		setButtonIcon(bTabu7, 6);
 				    		click_sound.setMicrosecondPosition(0);
 				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "7"; //diz qual botao foi clicado
+				    		
 				    		try {
 								sleep(10);
 							} catch (InterruptedException e1) {
@@ -400,6 +428,9 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[7] && bTabu8.isEnabled()) {
 				    		setButtonIcon(bTabu8, 7);
 				    		click_sound.setMicrosecondPosition(0);
+				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "8"; //diz qual botao foi clicado
 				    		
 				    		try {
 								sleep(10);
@@ -433,6 +464,9 @@ public class IniciarTabuleiro extends Thread{
 				    	if(!clicked[8] && bTabu9.isEnabled()) {
 				    		setButtonIcon(bTabu9, 8);
 				    		click_sound.setMicrosecondPosition(0);
+				    		
+				    		clickou = true; //sinaliza que foi clicado
+				    	    toServer = "9"; //diz qual botao foi clicado
 				    		
 				    		try {
 								sleep(10);
@@ -509,12 +543,8 @@ public class IniciarTabuleiro extends Thread{
 				else if(msg_serv.equals("D")) {
 					close = false;
 					load.close();
-					EnableAll();
-					EnableButtons();
 				}
-//				else {
-//					
-//				}
+
 			} catch(SocketException e) {
 				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
 				load.close();
@@ -526,9 +556,8 @@ public class IniciarTabuleiro extends Thread{
 			}
 		}
 		
-		if(bTabu1.isEnabled()) {
-			Play();
-		}
+		Play();
+		
 		
 	}
 	
@@ -661,21 +690,51 @@ public class IniciarTabuleiro extends Thread{
 	private void EnableAll() {
 		tabuleiro.setEnabled(true);
 		pdf.setEnabled(true);
-		swit.setEnabled(true);
 	}
 	
 	private void Play() {
 		String msg_serv;
 		try {
-			whoFirst();
-			msg_serv = conexao_entrada.readLine();
+			Dialogo("Selecionado primeiro jogador", "Sorte ou Azar?", 2000);//msg para esperar quem será o primeiro
+			
+			msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
 			
 			if(msg_serv.equals("first")) {
-				System.out.println(msg_serv);
+				Dialogo("Você será o primeiro!", "Sorte!", 2000);
+				First = true;
 			}else{
-				System.out.println(msg_serv);
+				Dialogo("Você será o segundo!", "Azar ):", 2000);
+				First = false;
 			}
 			
+			while(!win) {
+				//poe timeout paras mandar resposta
+				
+				System.out.println("entrou no while");
+				
+				if(First) {
+					EnableButtons();
+					EnableAll();
+					conexao.setSoTimeout(30000);
+					try {
+						System.out.println("espernado leitura");
+						conexao_saida.writeBytes(getClickButton() + '\n');
+						System.out.println("leeeu");
+						System.out.println(toServer);
+					}catch(SocketTimeoutException e) {
+						clickou = true;
+						toServer = "0";
+						
+						conexao.setSoTimeout(0);
+						Dialogo("Passou a vez", "Quac", 800);
+						conexao_saida.writeBytes("0");
+					}
+					DisableButtons();
+					DisableAll();
+				}
+				
+					
+			}
 			
 			
 		} catch (IOException e) {
@@ -684,23 +743,24 @@ public class IniciarTabuleiro extends Thread{
 		}
 	}
 	
-	//caixa de dialogo para esperar servidor mandar quem será o primeiro
-	private void whoFirst() {
+	//metodo para chamar uma caixa de dialogo temporaria
+	private void Dialogo(String msg, String title, long time) {
 		Object[] opt = {};
 		JDialog show;
 		JOptionPane con = new JOptionPane();
-		con.setMessage("Selecionado primeiro jogador");
+		//con.setMessage();
+		con.setMessage(msg);
 		con.setMessageType(1);
 		con.setOptions(opt);
 		
-		show = con.createDialog("Sorte? Azar?");
+		show = con.createDialog(title);
 		
 		//criação de uma thread pra poder rodar um sleep e fechar a dialog box sozinho
 		Thread paralelo =
 			    new Thread(){
 			        public void run(){
 			        	try {
-			    			Thread.sleep(2000);
+			    			Thread.sleep(time);
 			    			show.setVisible(false);
 			    			show.dispose();
 			    		} catch (InterruptedException e) {
@@ -714,5 +774,14 @@ public class IniciarTabuleiro extends Thread{
 		
 		show.setVisible(true);
 	}
-
+	
+	//retorna botão clicado
+	private String getClickButton() {
+		while(!clickou) {
+			
+		}
+		clickou = false;
+		return toServer;
+	}
+	
 }
