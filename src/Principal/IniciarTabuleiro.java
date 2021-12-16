@@ -69,6 +69,9 @@ public class IniciarTabuleiro extends Thread{
 		private ImageIcon nao = o;
 		
 		private int[][] matriz = new int[3][3];
+	
+		private String myCh = "";
+		private String win_number = "";
 		
 		//imagens
 		private ImageIcon pDeF = new ImageIcon(
@@ -716,20 +719,21 @@ public class IniciarTabuleiro extends Thread{
 					EnableButtons();
 					EnableAll();
 					
-					conexao_saida.writeBytes(getClickButton() + '\n');
-						
+					conexao_saida.writeBytes((myCh = getClickButton()) + '\n');
+					
+					putMatriz(Integer.parseInt(myCh), 1); //coloca na matriz
+					
 					First = false;
 					DisableButtons();
 					DisableAll();
 				}
-				System.out.println("wait");
 				fromServer = conexao_entrada.readLine();
 				
 				if(fromServer.matches("[0-9]+")) {
-					System.out.println("do servidor: " + fromServer);
 					clickButton(Integer.parseInt(fromServer));
+					putMatriz(Integer.parseInt(fromServer), 2); //coloca na matriz
 				}
-				else {
+				if(HaveWinner()){
 					if(fromServer.equals("P")){
 						Dialogo("Infelizmente você perdeu!", "Perdedor!", 3000);
 						win = true;
@@ -757,7 +761,6 @@ public class IniciarTabuleiro extends Thread{
 		Object[] opt = {};
 		JDialog show;
 		JOptionPane con = new JOptionPane();
-		//con.setMessage();
 		con.setMessage(msg);
 		con.setMessageType(1);
 		con.setOptions(opt);
@@ -791,7 +794,6 @@ public class IniciarTabuleiro extends Thread{
 		while(!clickou && count != 30000) {
 			Dormir(250); //sleep pra bater a cada 0,25 segundos
 			count += 250; //
-			System.out.println("esperando click");
 		}
 		
 		if(count == 30000) {
@@ -849,4 +851,102 @@ public class IniciarTabuleiro extends Thread{
 		botao.setIcon(nao);
 		clicked[n] = true;
 	}
+	
+private boolean HaveWinner() {
+		int freq = 0;
+		//linha a linha
+		for(int i = 0; i <3; i++) {
+			for(int j = 0; j <3; j++) {
+				
+				if(j == 0 && matriz[i][j] != 0) 
+					freq = matriz[i][j];
+				
+				if(j > 0 && (matriz[i][j] == 0 || matriz[i][j] != freq)) {
+					freq = 0;
+					break;
+				}
+					
+			}
+			if(freq != 0) {
+				win_number = Integer.toString(freq);
+				return true;
+			}
+		}
+		
+		//coluna por coluna
+		for(int i = 0; i <3; i++) {
+			for(int j = 0; j <3; j++) {
+				
+				if(j == 0 && matriz[j][i] != 0)
+					freq = matriz[j][i];
+				
+				if(j > 0 && (matriz[j][i] == 0 || matriz[j][i] != freq)) {
+					freq = 0;
+					break;
+				}
+					
+			}
+			if(freq != 0) {
+				win_number = Integer.toString(freq);
+				return true;
+			}
+		}
+		
+		if(matriz[1][1] != 0) { //verifica se o meio do tabuleiro é diferente de zero
+			freq = matriz[1][1];
+			
+			
+	
+			
+			if(matriz[0][0] != freq || matriz[2][2] != freq) { //verifica primeira diagonal
+
+			}else {
+				win_number = Integer.toString(freq);
+				return true;
+			}
+			
+			
+			if(matriz[0][2] != freq || matriz[2][0] != freq) { //verifica segunda diagonal
+				
+			}else {
+				win_number = Integer.toString(freq);
+				return true;
+			}
+			
+			freq = 0;
+		}
+		
+		return false;
+	}
+
+	private void putMatriz(int pos, int cli) { //recebe a posição e o numero do cliente
+		if(pos == 1) {
+			matriz[0][0] = cli;
+		}
+		else if(pos == 2) {
+			matriz[0][1] = cli;
+		}
+		else if(pos == 3) {
+			matriz[0][2] = cli;
+		}
+		else if(pos == 4) {
+			matriz[1][0] = cli;
+		}
+		else if(pos == 5) {
+			matriz[1][1] = cli;
+		}
+		else if(pos == 6) {
+			matriz[1][2] = cli;
+		}
+		else if(pos == 7) {
+			matriz[2][0] = cli;
+		}
+		else if(pos == 8) {
+			matriz[2][1] = cli;
+		}
+		else if(pos == 9) {
+			matriz[2][2] = cli;
+		}
+	}
+
 }
