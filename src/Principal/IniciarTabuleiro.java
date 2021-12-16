@@ -636,7 +636,7 @@ public class IniciarTabuleiro extends Thread{
 	//carrega os sons dos clicks
 	private void LoadSounds() throws UnsupportedAudioFileException, IOException {
 		this.click = AudioSystem.getAudioInputStream(
-				getClass().getClassLoader().getResource("fatality.wav"));
+				getClass().getClassLoader().getResource("click.wav"));
 		
 		try {
 			this.click_sound = AudioSystem.getClip();
