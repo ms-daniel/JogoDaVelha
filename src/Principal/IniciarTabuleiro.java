@@ -712,9 +712,6 @@ public class IniciarTabuleiro extends Thread{
 			
 			while(!win) {
 				//poe timeout paras mandar resposta
-				
-				System.out.println("entrou no while");
-				First = true;
 				if(First) {
 					EnableButtons();
 					EnableAll();
