@@ -729,6 +729,17 @@ public class IniciarTabuleiro extends Thread{
 					System.out.println("do servidor: " + fromServer);
 					clickButton(Integer.parseInt(fromServer));
 				}
+				else {
+					if(fromServer.equals("P")){
+						Dialogo("Infelizmente você perdeu!", "Perdedor!", 3000);
+						win = true;
+						System.exit(0);
+					}else {
+						Dialogo("Parabéns! Você ganhou essa!", "Ganhador!", 3000);
+						win = true;
+						System.exit(0);
+					}
+				}
 				
 				First = true;
 				
