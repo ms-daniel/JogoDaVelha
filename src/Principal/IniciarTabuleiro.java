@@ -99,6 +99,8 @@ public class IniciarTabuleiro extends Thread{
 		private Socket conexao;
 		private BufferedReader conexao_entrada; 
 		private DataOutputStream conexao_saida;
+		
+		//matriz para lugares ocupados
 
 	public IniciarTabuleiro() {
 		//preenche a matriz com 0
@@ -518,45 +520,46 @@ public class IniciarTabuleiro extends Thread{
 	
 	public void run(){
 		boolean close = true;
-		DisableButtons();
-		DisableAll();
-		load.start();
-		String msg_serv;
 		
-		while(close) {
-			try {
-				//espera outro jogador, avisado pelo servidor
-				//se o servidor mandar "sair" é pq houve algum erro
-				msg_serv = conexao_entrada.readLine();
-				System.out.println(msg_serv);
-				//caso ocorra algum erro o servidor manda "sair"
-				if(msg_serv.equals("sair")) {
-					conexao.close();
-					conexao_entrada.close();
-					conexao_saida.close();
-					load.close();
-					JOptionPane.showMessageDialog(null, "Disconectado!");
-					close = false;
-				}
-				
-				//caso outro jogador se conect o servidor manda "D" (done)
-				else if(msg_serv.equals("D")) {
-					close = false;
-					load.close();
-				}
-
-			} catch(SocketException e) {
-				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
-				load.close();
-				close = false;
-			}catch (IOException e) {
-				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
-				load.close();
-				close = false;
-			}
-		}
+//		DisableButtons();
+//		DisableAll();
+//		load.start();
+//		String msg_serv;
+//		
+//		while(close) {
+//			try {
+//				//espera outro jogador, avisado pelo servidor
+//				//se o servidor mandar "sair" é pq houve algum erro
+//				msg_serv = conexao_entrada.readLine();
+//				System.out.println(msg_serv);
+//				//caso ocorra algum erro o servidor manda "sair"
+//				if(msg_serv.equals("sair")) {
+//					conexao.close();
+//					conexao_entrada.close();
+//					conexao_saida.close();
+//					load.close();
+//					JOptionPane.showMessageDialog(null, "Disconectado!");
+//					close = false;
+//				}
+//				
+//				//caso outro jogador se conect o servidor manda "D" (done)
+//				else if(msg_serv.equals("D")) {
+//					close = false;
+//					load.close();
+//				}
+//
+//			} catch(SocketException e) {
+//				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+//				load.close();
+//				close = false;
+//			}catch (IOException e) {
+//				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+//				load.close();
+//				close = false;
+//			}
+//		}
 		
-		Play();
+		//Play();
 		
 		
 	}
@@ -693,11 +696,11 @@ public class IniciarTabuleiro extends Thread{
 	}
 	
 	private void Play() {
-		String msg_serv;
+		String fromServer;
 		try {
-			Dialogo("Selecionado primeiro jogador", "Sorte ou Azar?", 2000);//msg para esperar quem será o primeiro
+			//Dialogo("Selecionado primeiro jogador", "Sorte ou Azar?", 2000);//msg para esperar quem será o primeiro
 			
-			msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
+			/*msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
 			
 			if(msg_serv.equals("first")) {
 				Dialogo("Você será o primeiro!", "Sorte!", 2000);
@@ -705,35 +708,34 @@ public class IniciarTabuleiro extends Thread{
 			}else{
 				Dialogo("Você será o segundo!", "Azar ):", 2000);
 				First = false;
-			}
+			}*/
 			
 			while(!win) {
 				//poe timeout paras mandar resposta
 				
 				System.out.println("entrou no while");
-				
+				First = true;
 				if(First) {
 					EnableButtons();
 					EnableAll();
-					conexao.setSoTimeout(30000);
-					try {
-						System.out.println("espernado leitura");
-						conexao_saida.writeBytes(getClickButton() + '\n');
-						System.out.println("leeeu");
-						System.out.println(toServer);
-					}catch(SocketTimeoutException e) {
-						clickou = true;
-						toServer = "0";
+					
+					System.out.println("espernado leitura");
+					conexao_saida.writeBytes(getClickButton() + '\n');
 						
-						conexao.setSoTimeout(0);
-						Dialogo("Passou a vez", "Quac", 800);
-						conexao_saida.writeBytes("0");
-					}
+					First = false;
 					DisableButtons();
 					DisableAll();
 				}
 				
-					
+				fromServer = conexao_entrada.readLine();
+				
+				if(fromServer.matches("[0-9]+")) {
+					System.out.println("do servidor: " + fromServer);
+					clickButton(Integer.parseInt(fromServer));
+				}
+				
+				First = true;
+				
 			}
 			
 			
@@ -777,11 +779,62 @@ public class IniciarTabuleiro extends Thread{
 	
 	//retorna botão clicado
 	private String getClickButton() {
-		while(!clickou) {
-			
+		int count = 0; //usado como um "time"
+		
+		while(!clickou && count != 30000) {
+			Dormir(250); //sleep pra bater a cada 0,25 segundos
+			count += 250; //
+			System.out.println("esperando click");
 		}
+		
+		if(count == 30000) {
+			toServer = "0";
+			Dialogo("Passou a vez", "Quac", 1000);
+		}
+		
 		clickou = false;
 		return toServer;
 	}
 	
+	public void Dormir(long time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	
+	private void clickButton(int b) {
+		if(b == 1) {
+			setButtonIcon(bTabu1, 0);
+		}
+		else if(b == 2) {
+			setButtonIcon(bTabu2, 1);
+		}
+		else if(b == 3) {
+			setButtonIcon(bTabu3, 2);
+		}
+		else if(b == 4) {
+			setButtonIcon(bTabu4, 3);
+		}
+		else if(b == 5) {
+			setButtonIcon(bTabu5, 4);
+		}
+		else if(b == 6) {
+			setButtonIcon(bTabu6, 5);
+		}
+		else if(b == 7) {
+			setButtonIcon(bTabu7, 6);
+		}
+		else if(b == 8) {
+			setButtonIcon(bTabu8, 7);
+		}
+		else if(b == 9) {
+			setButtonIcon(bTabu9, 8);
+		}
+		else {
+			
+		}
+	}
 }
