@@ -715,11 +715,13 @@ public class IniciarTabuleiro extends Thread{
 			
 			while(!win) {
 				//poe timeout paras mandar resposta
+				boolean enviar = true;
 				if(First) {
 					EnableButtons();
 					EnableAll();
 					
-					conexao_saida.writeBytes((myCh = getClickButton()) + '\n');
+					if(enviar)
+						conexao_saida.writeBytes((myCh = getClickButton()) + '\n');
 					
 					putMatriz(Integer.parseInt(myCh), 1); //coloca na matriz
 					
@@ -734,6 +736,7 @@ public class IniciarTabuleiro extends Thread{
 					putMatriz(Integer.parseInt(fromServer), 2); //coloca na matriz
 				}
 				if(HaveWinner()){
+					enviar = false;
 					if(fromServer.equals("P")){
 						Dialogo("Infelizmente você perdeu!", "Perdedor!", 3000);
 						win = true;
