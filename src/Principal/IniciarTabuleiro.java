@@ -737,12 +737,12 @@ public class IniciarTabuleiro extends Thread{
 				}
 				if(HaveWinner()){
 					enviar = false;
-					if(fromServer.equals("P")){
-						Dialogo("Infelizmente você perdeu!", "Perdedor!", 3000);
+					if(fromServer.equals("V")){
+						Dialogo("Parabéns! Você ganhou essa!", "Ganhador!", 3000);
 						win = true;
 						System.exit(0);
 					}else {
-						Dialogo("Parabéns! Você ganhou essa!", "Ganhador!", 3000);
+						Dialogo("Infelizmente você perdeu!", "Perdedor!", 3000);
 						win = true;
 						System.exit(0);
 					}
