@@ -521,45 +521,45 @@ public class IniciarTabuleiro extends Thread{
 	public void run(){
 		boolean close = true;
 		
-//		DisableButtons();
-//		DisableAll();
-//		load.start();
-//		String msg_serv;
-//		
-//		while(close) {
-//			try {
-//				//espera outro jogador, avisado pelo servidor
-//				//se o servidor mandar "sair" é pq houve algum erro
-//				msg_serv = conexao_entrada.readLine();
-//				System.out.println(msg_serv);
-//				//caso ocorra algum erro o servidor manda "sair"
-//				if(msg_serv.equals("sair")) {
-//					conexao.close();
-//					conexao_entrada.close();
-//					conexao_saida.close();
-//					load.close();
-//					JOptionPane.showMessageDialog(null, "Disconectado!");
-//					close = false;
-//				}
-//				
-//				//caso outro jogador se conect o servidor manda "D" (done)
-//				else if(msg_serv.equals("D")) {
-//					close = false;
-//					load.close();
-//				}
-//
-//			} catch(SocketException e) {
-//				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
-//				load.close();
-//				close = false;
-//			}catch (IOException e) {
-//				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
-//				load.close();
-//				close = false;
-//			}
-//		}
+		DisableButtons();
+		DisableAll();
+		load.start();
+		String msg_serv;
 		
-		//Play();
+		while(close) {
+			try {
+				//espera outro jogador, avisado pelo servidor
+				//se o servidor mandar "sair" é pq houve algum erro
+				msg_serv = conexao_entrada.readLine();
+				System.out.println(msg_serv);
+				//caso ocorra algum erro o servidor manda "sair"
+				if(msg_serv.equals("sair")) {
+					conexao.close();
+					conexao_entrada.close();
+					conexao_saida.close();
+					load.close();
+					JOptionPane.showMessageDialog(null, "Disconectado!");
+					close = false;
+				}
+				
+				//caso outro jogador se conect o servidor manda "D" (done)
+				else if(msg_serv.equals("D")) {
+					close = false;
+					load.close();
+				}
+
+			} catch(SocketException e) {
+				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+				load.close();
+				close = false;
+			}catch (IOException e) {
+				JOptionPane.showMessageDialog(Janela1, "Erro! O Servidor pode ter fechado!");
+				load.close();
+				close = false;
+			}
+		}
+		
+		Play();
 		
 		
 	}
@@ -633,7 +633,7 @@ public class IniciarTabuleiro extends Thread{
 	//carrega os sons dos clicks
 	private void LoadSounds() throws UnsupportedAudioFileException, IOException {
 		this.click = AudioSystem.getAudioInputStream(
-				getClass().getClassLoader().getResource("awn.wav"));
+				getClass().getClassLoader().getResource("fatality.wav"));
 		
 		try {
 			this.click_sound = AudioSystem.getClip();
@@ -700,8 +700,8 @@ public class IniciarTabuleiro extends Thread{
 		try {
 			//Dialogo("Selecionado primeiro jogador", "Sorte ou Azar?", 2000);//msg para esperar quem será o primeiro
 			
-			/*msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
-			
+			String msg_serv = conexao_entrada.readLine();//o servidor envia quem será o primeiro
+			/*
 			if(msg_serv.equals("first")) {
 				Dialogo("Você será o primeiro!", "Sorte!", 2000);
 				First = true;
